@@ -1,5 +1,5 @@
-# Mantine Next Template
+# Todo Application (NextJs + Mantine + Supabase)
 
-Get started with the template by clicking `Use this template` button on the top of the page.
-
-[Documentation](https://mantine.dev/guides/next/)
+use `yarn dev` to start project locally.
+</br>
+use `yarn start` to start project in production mode.
