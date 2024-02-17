@@ -65,7 +65,7 @@ const Lists = (props: Props) => {
           px="sm"
           pt={"sm"}
         >
-          <Title order={2}>Todo Lists</Title>
+          <Title order={2}>📋 Todo Lists</Title>
           <Tooltip label="Add new list">
             <ActionIcon
               variant="filled"
