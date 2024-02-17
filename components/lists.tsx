@@ -18,24 +18,25 @@ type Props = {
 
 const Lists = (props: Props) => {
   const router = useRouter();
-  const { setLists } = useTodoList();
+  const { initiated, lists, setLists } = useTodoList();
   const [isFetchingLists, startFetchingListsTransaction] =
     React.useTransition();
 
   React.useEffect(() => {
-    startFetchingListsTransaction(async () => {
-      const result = await getLists();
-      const { error, data } = JSON.parse(result);
-      if (data)
-        setLists(
-          data.map((d: Server.Entities.ServerSideTodoList) => ({
-            id: d.id,
-            title: d.title,
-            createdBy: d.created_by,
-          }))
-        );
-    });
-  }, [setLists]);
+    if (initiated && !lists.length)
+      startFetchingListsTransaction(async () => {
+        const result = await getLists();
+        const { error, data } = JSON.parse(result);
+        if (data)
+          setLists(
+            data.map((d: Server.Entities.ServerSideTodoList) => ({
+              id: d.id,
+              title: d.title,
+              createdBy: d.created_by,
+            }))
+          );
+      });
+  }, [initiated, lists, setLists]);
 
   const onListClickHandler = React.useCallback(
     (list: Client.Todo.TodoList) => {

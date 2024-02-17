@@ -1,3 +1,5 @@
+"use client";
+
 import { create } from "zustand";
 import { Client } from "../models";
 
@@ -17,6 +19,7 @@ type TodoStore = {
   changedListsIds: Array<Client.Todo.TodoList["id"]>;
   checkpoint?: boolean;
   user: User | null;
+  initiated: boolean;
   setLists: (lists: Array<Client.Todo.TodoList>) => void;
   addList: (list: Client.Todo.TodoList) => void;
   removeList: (id: Client.Todo.TodoList["id"]) => void;
@@ -36,6 +39,15 @@ type TodoStore = {
   ) => void;
   setUser: (user: User) => void;
   toggleListFilter: (listId: Client.Todo.TodoList["id"]) => void;
+  setInitState: (
+    lists: Array<Client.Todo.TodoList>,
+    localTasks: Record<
+      Client.Todo.TodoList["id"],
+      Array<Client.Todo.TodoTask> | undefined
+    >,
+    filteredLists: Array<Client.Todo.TodoList["id"]>,
+    changedListsIds: Array<Client.Todo.TodoList["id"]>
+  ) => void;
 };
 
 export const useTodoList = create<TodoStore>((set) => ({
@@ -45,6 +57,7 @@ export const useTodoList = create<TodoStore>((set) => ({
   changedListsIds: [],
   checkpoint: false,
   user: null,
+  initiated: false,
   setLists(lists) {
     set(() => ({ lists, changedListsIds: [] }));
   },
@@ -119,6 +132,15 @@ export const useTodoList = create<TodoStore>((set) => ({
       filteredLists: state.filteredLists.includes(listId)
         ? state.filteredLists.filter((id) => id !== listId)
         : [...state.filteredLists, listId],
+    }));
+  },
+  setInitState(lists, localTasks, filteredLists, changedListsIds) {
+    set(() => ({
+      lists,
+      localTasks,
+      filteredLists,
+      changedListsIds,
+      initiated: true,
     }));
   },
 }));

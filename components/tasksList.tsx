@@ -13,12 +13,13 @@ export default function TasksList() {
   const listId = +params.listId;
   const [isFetching, startFetchTransaction] = React.useTransition();
 
-  const [tasks, setTasks] = useTodoList((store) => [
-    store.localTasks[listId],
-    store.setTasks,
-  ]);
-  const isListFilterEnabled = useTodoList((store) =>
-    store.filteredLists.includes(listId)
+  const [tasks, setTasks, isListFilterEnabled, initiated] = useTodoList(
+    (store) => [
+      store.localTasks[listId],
+      store.setTasks,
+      store.filteredLists.includes(listId),
+      store.initiated,
+    ]
   );
 
   const fetchTasks = async () => {
@@ -42,8 +43,8 @@ export default function TasksList() {
   };
 
   React.useEffect(() => {
-    if (!tasks) fetchTasks();
-  }, [tasks]);
+    if (!tasks && initiated) fetchTasks();
+  }, [tasks, initiated]);
 
   return (
     <Flex direction={"column"} gap="sm" mt="1rem">
