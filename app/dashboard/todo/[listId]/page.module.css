@@ -1,0 +1,11 @@
+.tasksListContainer {
+  width: 100%;
+  > div {
+    width: 100%;
+  }
+  @media (min-width: $mantine-breakpoint-sm) {
+    > div {
+      width: 50%;
+    }
+  }
+}
