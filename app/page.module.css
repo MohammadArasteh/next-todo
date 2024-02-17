@@ -1,0 +1,16 @@
+.container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  p {
+    width: 90%;
+  }
+  @media (min-width: $mantine-breakpoint-sm) {
+    flex-direction: row;
+    p {
+      width: 35%;
+    }
+  }
+}
