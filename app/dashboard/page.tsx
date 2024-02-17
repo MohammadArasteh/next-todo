@@ -3,7 +3,7 @@ import { Box, List, ListItem, Space, Text, Title } from "@mantine/core";
 export default function Dashboard() {
   return (
     <>
-      <Box style={{ overflowX: "hidden", overflowY: "auto" }}>
+      <Box style={{ overflowX: "hidden", overflowY: "auto" }} pr="50px">
         <Title order={2} fw={700}>
           Creating and Managing Todos
         </Title>
