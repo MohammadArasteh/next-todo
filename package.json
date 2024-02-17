@@ -7,12 +7,17 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "update-supabase-types": "supabase gen types typescript --project-id okugjmpprcikpmoqjcke > models/server/database.types.ts"
   },
   "dependencies": {
     "@mantine/core": "7.5.1",
     "@mantine/dates": "^7.5.3",
     "@mantine/form": "^7.5.2",
     "@mantine/hooks": "7.5.1",
+    "@supabase/auth-helpers-nextjs": "^0.9.0",
+    "@supabase/ssr": "^0.1.0",
+    "@supabase/supabase-js": "^2.39.6",
+    "dayjs": "^1.11.10",
     "next": "14.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
