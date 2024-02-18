@@ -18,12 +18,14 @@ type Props = {
 
 const Lists = (props: Props) => {
   const router = useRouter();
-  const { initiated, lists, setLists } = useTodoList();
+  const { initiated, setLists } = useTodoList();
   const [isFetchingLists, startFetchingListsTransaction] =
     React.useTransition();
 
+  const isListsFetched = React.useRef<boolean>(false);
+
   React.useEffect(() => {
-    if (initiated && !lists.length)
+    if (initiated && !isListsFetched.current)
       startFetchingListsTransaction(async () => {
         const result = await getLists();
         const { error, data } = JSON.parse(result);
@@ -35,8 +37,9 @@ const Lists = (props: Props) => {
               createdBy: d.created_by,
             }))
           );
+        isListsFetched.current = true;
       });
-  }, [initiated, lists, setLists]);
+  }, [initiated, setLists]);
 
   const onListClickHandler = React.useCallback(
     (list: Client.Todo.TodoList) => {
