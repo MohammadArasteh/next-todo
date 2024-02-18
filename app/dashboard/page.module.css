@@ -10,9 +10,11 @@
   @media (min-width: $mantine-breakpoint-xs) {
     display: block;
     min-width: 200px;
+    max-width: 200px;
   }
   @media (min-width: $mantine-breakpoint-sm) {
     display: block;
     min-width: 300px;
+    max-width: 300px;
   }
 }

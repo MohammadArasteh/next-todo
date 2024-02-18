@@ -5,7 +5,12 @@
   }
   @media (min-width: $mantine-breakpoint-sm) {
     > div {
-      width: 50%;
+      width: 100%;
+    }
+  }
+  @media (min-width: $mantine-breakpoint-lg) {
+    > div {
+      width: 70%;
     }
   }
 }
