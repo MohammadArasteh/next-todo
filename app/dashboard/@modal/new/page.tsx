@@ -5,7 +5,6 @@ import { createList } from "@/lib/server-actions/todo";
 import { useTodoList } from "@/store/zustand";
 import { Button, Divider, Group, Modal, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useDisclosure } from "@mantine/hooks";
 import { useRouter } from "next/navigation";
 
 type FormValues = {
@@ -13,7 +12,6 @@ type FormValues = {
 };
 
 export default function New() {
-  const [, { close }] = useDisclosure(false);
   const router = useRouter();
 
   const form = useForm<FormValues>({
@@ -39,15 +37,16 @@ export default function New() {
         createdBy: data.created_by,
         title: data.title,
       });
-      router.push(`/dashboard/todo/${data.id}`);
-      onClose();
+      setTimeout(() => {
+        router.push(`/dashboard/todo/${data.id}`);
+      }, 1000);
+      router.back();
     }
     setIsSubmitting(false);
   };
 
   const onClose = () => {
     router.back();
-    close();
   };
 
   return (
