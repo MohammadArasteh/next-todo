@@ -48,9 +48,19 @@ export default function TasksListActions() {
     });
   };
 
+  /**
+   * This section of code clearly needs explanation...
+   * contact writer for more info
+   */
   const onPushChanges = async () => {
     startPushTransition(async () => {
-      await saveListLocalTasks(listId, tasks);
+      await fetch("/api", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ listId, tasks }),
+      });
       const result = await getListTasks(listId);
       const { data } = JSON.parse(result);
       if (data)

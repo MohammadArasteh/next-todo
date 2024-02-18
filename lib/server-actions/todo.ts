@@ -76,5 +76,5 @@ export async function saveListLocalTasks(
       dueDate: task.dueDate,
     }))
   );
-  return "OK";
+  return JSON.stringify({ status: 200 });
 }
